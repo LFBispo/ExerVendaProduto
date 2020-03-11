@@ -36,7 +36,10 @@ namespace VendaProduto.Activities
 
         private void BtnCadastrarProduto_Click(object sender, EventArgs e)
         {
-            
+            Produto novoProduto = new Produto(listaProdutos.Count + 1, edtNomeProduto.Text, int.Parse(edtPrecoUnit.Text), int.Parse(edtQtdEstoque.Text), 1);
+            novoProduto.Id = novoProduto.Incluir();
+            listaProdutos.Add(novoProduto);
+            Toast.MakeText(this, "Item Adicionado", ToastLength.Long).Show();
         }
     }
 }
