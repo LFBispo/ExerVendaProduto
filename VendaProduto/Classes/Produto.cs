@@ -70,6 +70,63 @@ namespace VendaProduto.Classes
 
             return produtos;
         }
+      
+
+        public int Incluir()
+        {
+            List<MySqlParameter> parametros = new List<MySqlParameter>();
+
+            parametros.Add(new MySqlParameter("NomeProduto", NomeProduto));
+            parametros.Add(new MySqlParameter("PrecoUnit", PrecoUnit));
+            parametros.Add(new MySqlParameter("QtdEstocada", QtdEstocada));
+            parametros.Add(new MySqlParameter("Ativo", Ativo));
+
+            DataSet ds = base.Consultar("PC_SP_InsProdutos", parametros);
+            int id = 0;
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                int.TryParse(ds.Tables[0].Rows[0][0].ToString(), out id);
+            }
+            return id;
+        }
+
+        public string Atualizar()
+        {
+            List<MySqlParameter> parametros = new List<MySqlParameter>();
+
+            parametros.Add(new MySqlParameter("NomeProduto", NomeProduto));
+            parametros.Add(new MySqlParameter("PrecoUnit", PrecoUnit));
+            parametros.Add(new MySqlParameter("QtdEstocada", QtdEstocada));
+            parametros.Add(new MySqlParameter("Ativo", Ativo));
+
+            DataSet ds = base.Consultar("PC_SP_AltProduto", parametros);
+
+            string mensagem = string.Empty;
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                mensagem = ds.Tables[0].Rows[0][0].ToString();
+            }
+            return mensagem;
+        }
+
+        public string Excluir()
+        {
+            List<MySqlParameter> parametros = new List<MySqlParameter>();
+
+            parametros.Add(new MySqlParameter("Id", Id));
+
+            DataSet ds = base.Consultar("PC_SP_ExcluiProduto", parametros);
+
+            string mensagem = string.Empty;
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                mensagem = ds.Tables[0].Rows[0][0].ToString();
+            }
+            return mensagem;
+        }
 
         private List<Produto> Converter(DataSet ds)
         {

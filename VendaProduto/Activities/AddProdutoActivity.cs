@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using VendaProduto.Classes;
 
 namespace VendaProduto.Activities
 {
@@ -18,6 +19,9 @@ namespace VendaProduto.Activities
     {
         EditText edtNomeProduto, edtPrecoUnit, edtQtdEstoque;
         Button btnCadastrarProduto;
+
+        //Declaração de uma Lista
+        List<Produto> listaProdutos = new List<Produto>();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
