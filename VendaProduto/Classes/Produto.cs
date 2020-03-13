@@ -70,7 +70,6 @@ namespace VendaProduto.Classes
 
             return produtos;
         }
-      
 
         public int Incluir()
         {

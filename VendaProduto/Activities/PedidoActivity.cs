@@ -18,6 +18,7 @@ namespace VendaProduto.Activities
     [Activity()]
     public class PedidoActivity : AppCompatActivity
     {
+
         Spinner spnProdutos;
         Button btnAdicionarPedido;
         Button btnFinalizarPedido;
@@ -67,11 +68,12 @@ namespace VendaProduto.Activities
 
         private void BtnFinalizarPedido_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void BtnAdicionarPedido_Click(object sender, EventArgs e)
         {
+
 
         }
     }

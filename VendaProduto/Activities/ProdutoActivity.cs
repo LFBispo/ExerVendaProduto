@@ -15,7 +15,7 @@ using VendaProduto.Classes;
 using ToolbarV7 = Android.Support.V7.Widget.Toolbar;
 
 namespace VendaProduto.Activities
-{    
+{
     /// <summary>
     /// Activity que irá gerenciar produtos. (CRUD)
     /// Uma lista de produtos é carregada numa list (que é adaptada e exibida numa ListView).
@@ -45,6 +45,19 @@ namespace VendaProduto.Activities
 
             AdaptadorProdutos adp = new AdaptadorProdutos(this, produtos);
             lstProdutos.Adapter = adp;
+
+            lstProdutos.ItemClick += LstProdutos_ItemClick;
+            lstProdutos.ItemLongClick += LstProdutos_ItemLongClick;
+        }
+
+        private void LstProdutos_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void LstProdutos_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
