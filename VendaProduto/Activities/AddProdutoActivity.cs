@@ -20,8 +20,7 @@ namespace VendaProduto.Activities
         EditText edtNomeProduto, edtPrecoUnit, edtQtdEstoque;
         Button btnCadastrarProduto;
 
-        //Declaração de uma Lista
-        List<Produto> listaProdutos = new List<Produto>();
+        List<Produto> ListaProdutos = new List<Produto>();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -40,9 +39,9 @@ namespace VendaProduto.Activities
 
         private void BtnCadastrarProduto_Click(object sender, EventArgs e)
         {
-            Produto novoProduto = new Produto(listaProdutos.Count + 1, edtNomeProduto.Text, int.Parse(edtPrecoUnit.Text), int.Parse(edtQtdEstoque.Text), 1);
-            novoProduto.Id = novoProduto.Incluir();
-            listaProdutos.Add(novoProduto);
+            Produto newproduto = new Produto(edtNomeProduto.Text, decimal.Parse(edtPrecoUnit.Text), int.Parse(edtQtdEstoque.Text), 1);
+            newproduto.Id = newproduto.InsereProduto();
+            ListaProdutos.Add(newproduto);
             Toast.MakeText(this, "Item Adicionado", ToastLength.Long).Show();
         }
     }

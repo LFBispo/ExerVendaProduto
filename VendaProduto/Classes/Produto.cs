@@ -57,6 +57,21 @@ namespace VendaProduto.Classes
             return produtos;
         }
 
+        public static List<Produto> BuscarProduto(string texto, List<Produto> produtos)
+        {
+            List<Produto> produtosFiltro = new List<Produto>();
+            try
+            {
+                produtosFiltro = (from p in produtos where p.NomeProduto.ToUpper().Contains(texto.ToUpper()) select p).ToList();
+                return produtosFiltro;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<Produto> BuscarProdutosPedido(int idPedido)
         {
             List<MySqlParameter> parametros = new List<MySqlParameter>()
@@ -70,19 +85,17 @@ namespace VendaProduto.Classes
 
             return produtos;
         }
-
-        public int Incluir()
+        public int InsereProduto()
         {
             List<MySqlParameter> parametros = new List<MySqlParameter>();
 
             parametros.Add(new MySqlParameter("NomeProduto", NomeProduto));
             parametros.Add(new MySqlParameter("PrecoUnit", PrecoUnit));
-            parametros.Add(new MySqlParameter("QtdEstocada", QtdEstocada));
+            parametros.Add(new MySqlParameter("QntEstocada", QtdEstocada));
             parametros.Add(new MySqlParameter("Ativo", Ativo));
 
-            DataSet ds = base.Consultar("PC_SP_InsProdutos", parametros);
+            DataSet ds = base.Consultar("VP_SP_InsProduto", parametros);
             int id = 0;
-
             if (ds.Tables[0].Rows.Count > 0)
             {
                 int.TryParse(ds.Tables[0].Rows[0][0].ToString(), out id);
@@ -90,35 +103,14 @@ namespace VendaProduto.Classes
             return id;
         }
 
-        public string Atualizar()
+        public string DesativarProduto()
         {
             List<MySqlParameter> parametros = new List<MySqlParameter>();
 
-            parametros.Add(new MySqlParameter("NomeProduto", NomeProduto));
-            parametros.Add(new MySqlParameter("PrecoUnit", PrecoUnit));
-            parametros.Add(new MySqlParameter("QtdEstocada", QtdEstocada));
-            parametros.Add(new MySqlParameter("Ativo", Ativo));
+            parametros.Add(new MySqlParameter("ID", Id));
 
-            DataSet ds = base.Consultar("PC_SP_AltProduto", parametros);
-
-            string mensagem = string.Empty;
-
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                mensagem = ds.Tables[0].Rows[0][0].ToString();
-            }
-            return mensagem;
-        }
-
-        public string Excluir()
-        {
-            List<MySqlParameter> parametros = new List<MySqlParameter>();
-
-            parametros.Add(new MySqlParameter("Id", Id));
-
-            DataSet ds = base.Consultar("PC_SP_ExcluiProduto", parametros);
-
-            string mensagem = string.Empty;
+            DataSet ds = base.Consultar("VP_SP_DesativarProduto", parametros);
+            string mensagem = "";
 
             if (ds.Tables[0].Rows.Count > 0)
             {
